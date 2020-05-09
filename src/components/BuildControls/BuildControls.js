@@ -21,11 +21,16 @@ const buildControls = (props) => {
                         key={i}
                         added={() => props.ingredientAdded(ctrl.type)}
                         removed={() => props.ingredientRemoved(ctrl.type)}
-                    >
-                        {ctrl.label}
-                    </BuildControl>
+                        label={ctrl.label}
+                    />
                 );
             })}
+            <button
+                disabled={!props.purchasable}
+                className={classes.OrderButton}
+            >
+                Order Now
+            </button>
         </div>
     )
 }
