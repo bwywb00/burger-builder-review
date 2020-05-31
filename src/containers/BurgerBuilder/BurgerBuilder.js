@@ -100,42 +100,13 @@ class BurgerBuilder extends Component {
     }
 
     purchaseContinueHandler = () => {
-        // this.setState({
-        //     loading: true
-        // })
-        // const order = {
-        //     ingredients: this.state.ingredients,
-        //     price: this.state.totalPrice.toFixed(2),
-        //     customer: {
-        //         name: 'Sung',
-        //         address: {
-        //             street: 'Teststreet 1',
-        //             zipCode: '41351',
-        //             country: 'Korea',
-        //         },
-        //         email: 'test@test.com'
-        //     },
-        //     devliveryMethod: 'fastest'
-        // }
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false
-        //         });
-        //     })
-        //     .catch(error => {
-        //         this.setState({
-        //             loading: false,
-        //             purchasing: false
-        //         });
-        //     });
 
         // query를 사용해서 state.ingredient 값을 전달하기
         const queryParams = [];
         for (let i in this.state.ingredients) {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
+        queryParams.push('price=' + this.state.totalPrice.toFixed(2));
         const queryString = queryParams.join('&');
         this.props.history.push({
             pathname: '/checkout',
