@@ -1,8 +1,8 @@
-// BurgerBuilder에서 만든 burger을 다시 보여주고
-// 취소할 것인지, 계속 진행할 것인지를 따지는 Component
-
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
+import ContactData from '../Checkout/ContactData/ContactData';
 
 class Checkout extends Component {
 
@@ -15,7 +15,6 @@ class Checkout extends Component {
         }
     }
 
-    // **query로 전달받은 데이터를 분해하는 과정**
     componentDidMount() {
         const query = new URLSearchParams(this.props.location.search);
         const ingredients = {};
@@ -41,6 +40,7 @@ class Checkout extends Component {
                     checkoutCancelled={this.checkoutCancelledHandler}
                     checkoutContinued={this.checkoutContinuedHandler}
                 />
+                <Route path={this.props.match.path + '/contact-data'} component={ContactData} />
             </div>
         )
     }
