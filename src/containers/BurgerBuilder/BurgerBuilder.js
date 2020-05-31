@@ -130,7 +130,17 @@ class BurgerBuilder extends Component {
         //             purchasing: false
         //         });
         //     });
-        this.props.history.push('/checkout');
+
+        // query를 사용해서 state.ingredient 값을 전달하기
+        const queryParams = [];
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        const queryString = queryParams.join('&');
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
     render() {
