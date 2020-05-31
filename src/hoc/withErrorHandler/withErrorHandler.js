@@ -14,20 +14,25 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
-        // axios 인터셉터(axios를 사용하는 컴포넌트에서request와 response 핸들링 해주는 뭐.. 그런 기능)
-
-        // BurgerBuilder의 ComponentDidMount() 메소드 안에서 발생하는 문제를 해결하기 위해서
-        // 먼저 axios.interceptors를 만들어준다
         UNSAFE_componentWillMount() {
 
-            axios.interceptors.request.use(req => {
+            // axios.interceptors를 컨트롤 하기 위해서는 특정 변수에 저장해서 다뤄야 한다
+            this.reqInterceptor = axios.interceptors.request.use(req => {
                 this.setState({ error: null });
                 return req;
             })
 
-            axios.interceptors.response.use(res => res, error => {
+            this.resInterceptor = axios.interceptors.response.use(res => res, error => {
                 this.setState({ error: error });
             })
+        }
+
+        // hoc함수는 다양한 곳에서 사용될 수 있는데
+        // 사용하지 않는 컴포넌트에서는 위에서 생성한 axios.interceptors를 제거해야 
+        // 메모리가 새는 것을 방지할 수 있다
+        componentWillUnmount() {
+            axios.interceptors.request.eject(this.reqInterceptor);
+            axios.interceptors.response.eject(this.resInterceptor);
         }
 
         errorConfirmedHandler = () => {
