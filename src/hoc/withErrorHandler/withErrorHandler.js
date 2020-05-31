@@ -14,9 +14,11 @@ const withErrorHandler = (WrappedComponent, axios) => {
             error: null
         }
 
-        //axios 인터셉터(axios를 통한 request와 response를 전역적으로 처리하는 것 처럼 보일 수 있다?)
+        // axios 인터셉터(axios를 사용하는 컴포넌트에서request와 response 핸들링 해주는 뭐.. 그런 기능)
 
-        componentDidMount() {
+        // BurgerBuilder의 ComponentDidMount() 메소드 안에서 발생하는 문제를 해결하기 위해서
+        // 먼저 axios.interceptors를 만들어준다
+        UNSAFE_componentWillMount() {
 
             axios.interceptors.request.use(req => {
                 this.setState({ error: null });
