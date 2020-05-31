@@ -18,6 +18,7 @@ class Modal extends Component {
     render() {
         return (
             <Aux>
+                {/* Modal을 닫기 위한 props는 modalClosed*/}
                 <Backdrop show={this.props.show} clicked={this.props.modalClosed} />
                 <div
                     className={classes.Modal}
