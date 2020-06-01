@@ -7,14 +7,14 @@ const navigationItems = (props) => (
     <ul className={classes.NavagationItems}>
         <NavigationItem
             link="/"
-            active
+            exact
         >
             Burger Builder
             </NavigationItem>
         <NavigationItem
-            link="/"
+            link="/orders"
         >
-            Check Out
+            Orders
             </NavigationItem>
     </ul>
 );
