@@ -87,6 +87,21 @@ class ContactData extends Component {
             });
     }
 
+    // 이런식으로 state를 변경하는 것은 기억해두기
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+
+        const updatedFormElement = {
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+
+        this.setState({ orderForm: updatedOrderForm });
+    }
+
     render() {
 
         const formElementsArray = [];
@@ -96,7 +111,6 @@ class ContactData extends Component {
                 config: this.state.orderForm[key]
             });
         }
-        console.log(formElementsArray);
 
         let form = (
             <form>
@@ -107,6 +121,7 @@ class ContactData extends Component {
                             elementType={formElement.config.elementType}
                             elementConfig={formElement.config.elementConfig}
                             value={formElement.config.value}
+                            changed={event => this.inputChangedHandler(event, formElement.id)}
                         />
                     ))
                 }
