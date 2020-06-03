@@ -76,7 +76,7 @@ class ContactData extends Component {
                 valid: false,
                 touched: false
             },
-            devliveryMethod: {
+            deliveryMethod: {
                 elementType: 'select',
                 elementConfig: {
                     options: [
@@ -84,7 +84,7 @@ class ContactData extends Component {
                         { value: 'cheapest', displayValue: 'Cheapest' }
                     ]
                 },
-                value: '',
+                value: 'fastest',
                 validation: {},
                 valid: true
             },
