@@ -112,21 +112,21 @@ class ContactData extends Component {
     }
 
     checkValidity(value, rules) {
-        let isValid = false;
+        let isValid = true;
 
         if (rules.required) {
-            isValid = value.trim() !== '';
+            isValid = value.trim() !== '' && isValid;
         }
 
         // 아래의 함수는 잘못된 함수
         // 여기서 isValid가 false라고 하더라도
         if (rules.minLength) {
-            isValid = value.length >= rules.minLength
+            isValid = ((value.length >= rules.minLength) && isValid);
         }
 
         // 여기서 isVaild가 true면
         if (rules.maxLength) {
-            isValid = value.length <= rules.maxLength
+            isValid = ((value.length <= rules.maxLength) && isValid);
         }
 
         // return되는 isValid는 true 이기 때문이다
